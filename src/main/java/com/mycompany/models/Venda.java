@@ -6,6 +6,8 @@ import java.util.Date;
 public class Venda {
     
     int qtdProduto;
+    String nomeCliente;
+    String tipoVenda;
     String nomeProduto;
     int precoProduto;
     int idVenda;
@@ -19,8 +21,10 @@ public class Venda {
     public Venda() { 
     }
     
-    public Venda(int qtd, String nome, int precoPd, int idVenda, int precoTotal, int idCliente, int idProduto) {
+    public Venda(int qtd, String nomeC, String tipoV, String nome, int precoPd, int idVenda, int precoTotal, int idCliente, int idProduto) {
         this.qtdProduto = qtd;
+        this.nomeCliente = nomeC;
+        this.tipoVenda = tipoV;
         this.nomeProduto = nome;
         this.precoProduto = precoPd;
         this.idVenda = idVenda;
@@ -32,6 +36,24 @@ public class Venda {
     public int getQtdProduto() {
         return qtdProduto;
     }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+
+    public String getTipoVenda() {
+        return tipoVenda;
+    }
+
+    public void setTipoVenda(String tipoVenda) {
+        this.tipoVenda = tipoVenda;
+    }
+    
+    
 
     public void setQtdProduto(int qtdProduto) {
         this.qtdProduto = qtdProduto;

@@ -21,6 +21,14 @@ public class Produtos {
         this.qtdProduto = qtd;
         this.valorProduto = valor;
     }
+    
+    public Produtos (int id, String nome, String cor, int qtd, int valor) {
+        this.id = id;
+        this.nomeProduto = nome;
+        this.corProduto = cor;
+        this.qtdProduto = qtd;
+        this.valorProduto = valor;
+    }
 
     public int getId() {
         return id;

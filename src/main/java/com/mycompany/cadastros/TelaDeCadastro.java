@@ -22,7 +22,7 @@ public class TelaDeCadastro extends javax.swing.JFrame {
     Clientes obj = null;
     public TelaDeCadastro() {
         initComponents();
-        lblID.setText("");
+      
     }
     
     public TelaDeCadastro(Clientes clienteAlterar) {

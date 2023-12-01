@@ -332,7 +332,6 @@ public class ClientesDao {
         boolean retorno = false;
         Connection conexao = null;
         PreparedStatement comandoSQL = null;
-        ResultSet rs = null;
         
         // tentativa de conexao
         try {
@@ -344,7 +343,6 @@ public class ClientesDao {
             comandoSQL.setInt(1,idExcluir);
             
             int linhasAfetadas = comandoSQL.executeUpdate();
-            System.out.println(linhasAfetadas);
             if(linhasAfetadas == 1) {
                 retorno = true;
             }

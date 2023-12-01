@@ -16,12 +16,22 @@ import javax.swing.JOptionPane;
  * @author gustavo.asteixeira1
  */
 public class TelaCadastroProduto extends javax.swing.JFrame {
-
-    /**
-     * Creates new form TelaCadastroProduto
-     */
+    
+    Produtos obj = null;
+    
     public TelaCadastroProduto() {
         initComponents();
+        lblID.setText("");
+    }
+    
+    public TelaCadastroProduto(Produtos prodAlterar) {
+        initComponents();
+        this.obj = prodAlterar;
+        lblID.setText(String.valueOf(obj.getId()));
+        txtNomeCadastro.setText(String.valueOf(obj.getNomeProduto()));
+        txtCorCadastro.setText(String.valueOf(obj.getCorProduto()));
+        txtQtdEstoque.setText(String.valueOf(obj.getQtdProduto()));
+        txtPrecoProduto.setText(String.valueOf(obj.getValorProduto()));
     }
 
     /**
@@ -47,6 +57,8 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         txtQtdEstoque = new javax.swing.JTextField();
         txtPrecoProduto = new javax.swing.JTextField();
+        lblID = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 102));
@@ -130,6 +142,10 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        lblID.setText("0");
+
+        jLabel4.setText("ID:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,19 +154,24 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(24, 24, 24)
-                            .addComponent(jLabel2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomeCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCorCadastro)
+                                    .addComponent(txtCorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblCorCadastro1)
+                                    .addComponent(lblEstoqueCadastro))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(lblNomeCadastro)
-                                    .addComponent(txtNomeCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(lblCorCadastro)
-                                .addComponent(txtCorCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblCorCadastro1)
-                                .addComponent(lblEstoqueCadastro)))
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblID))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(24, 24, 24)
+                            .addComponent(jLabel2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +187,10 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(lblNomeCadastro)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNomeCadastro)
+                    .addComponent(lblID)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNomeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -209,6 +233,7 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorCadastroActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int idAlterar = Integer.parseInt(lblID.getText());
         String nomeProduto = txtNomeCadastro.getText();
         String corProduto = txtCorCadastro.getText();
         int estoqueProduto = Integer.parseInt(txtQtdEstoque.getText());
@@ -246,13 +271,10 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(rootPane, mensagemErro);
         } else {
-            Produtos produto = new Produtos(nomeProduto, corProduto, estoqueProduto, precoProduto);
-            boolean retorno = ProdutosDao.SalvarProdutos(produto);
+            Produtos produto = new Produtos(idAlterar,nomeProduto, corProduto, estoqueProduto, precoProduto);
+            boolean retorno = ProdutosDao.AlterarProdutos(produto);
             if (retorno) {
                 JOptionPane.showMessageDialog(rootPane, "Sucesso");
-                SistemaDaFirma x = new SistemaDaFirma();
-                x.setVisible(true);
-                this.setVisible(false);
             } else {
             JOptionPane.showMessageDialog(rootPane, "Falha");
             }
@@ -331,11 +353,13 @@ public class TelaCadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCorCadastro;
     private javax.swing.JLabel lblCorCadastro1;
     private javax.swing.JLabel lblEstoqueCadastro;
+    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblNomeCadastro;
     private javax.swing.JTextField txtCorCadastro;
     private javax.swing.JTextField txtNomeCadastro;
