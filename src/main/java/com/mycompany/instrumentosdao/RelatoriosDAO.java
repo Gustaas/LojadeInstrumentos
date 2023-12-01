@@ -4,10 +4,6 @@
  */
 package com.mycompany.instrumentosdao;
 
-import static com.mycompany.instrumentosdao.ClientesDao.login;
-import static com.mycompany.instrumentosdao.ClientesDao.senha;
-import static com.mycompany.instrumentosdao.ClientesDao.url;
-import com.mycompany.models.Produtos;
 import com.mycompany.models.Relatorios;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

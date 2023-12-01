@@ -1371,7 +1371,10 @@ public class SistemaDaFirma extends javax.swing.JFrame{
         int qtdProduto = Integer.parseInt(txtQuantidade.getText());
         ArrayList<Produtos> produtos = ProdutosDao.ListarProdutosVenda(idProduto);
         DefaultTableModel modelo = (DefaultTableModel) tblVenda.getModel();
-        int numeroVenda = VendasDao.ultimaVenda();
+        int numeroVenda = 1;
+        if (VendasDao.ultimaVenda() > 1) {
+            numeroVenda = VendasDao.ultimaVenda();
+        }
         lblVendaNumero.setText("Venda Numero: " + numeroVenda);
         
         //Para cada item na lista retornada do banco, adicionar na tabela

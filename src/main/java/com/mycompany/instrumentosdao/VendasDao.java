@@ -29,12 +29,13 @@ public class VendasDao {
                 // tentando conexao novamente
                 conexao = DriverManager.getConnection(url, login, senha);
                 // fornecendo os dados para inserção no banco de dados
-                comandoSQL = conexao.prepareStatement("INSERT INTO Vendas (nomeCliente, tipoVenda, Valor, DataVenda) VALUES (?,?,?,?)",
+                comandoSQL = conexao.prepareStatement("INSERT INTO Vendas (id_Cliente, nomeCliente, tipoVenda, Valor, DataVenda) VALUES (?,?,?,?,?)",
                                             PreparedStatement.RETURN_GENERATED_KEYS);
-                comandoSQL.setString(1,novaVenda.getNomeCliente());
-                comandoSQL.setString(2,novaVenda.getTipoVenda());
-                comandoSQL.setDouble(3,novaVenda.getPrecoVenda());
-                comandoSQL.setDate(4,new java.sql.Date(novaVenda.getDataVenda().getTime()));
+                comandoSQL.setInt(1, novaVenda.getIdCliente());
+                comandoSQL.setString(2,novaVenda.getNomeCliente());
+                comandoSQL.setString(3,novaVenda.getTipoVenda());
+                comandoSQL.setDouble(4,novaVenda.getPrecoVenda());
+                comandoSQL.setDate(5,new java.sql.Date(novaVenda.getDataVenda().getTime()));
                 linhasAfetadas = comandoSQL.executeUpdate();
             }
             Class.forName("com.mysql.cj.jdbc.Driver");
